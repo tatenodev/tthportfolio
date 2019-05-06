@@ -1,0 +1,99 @@
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+img{
+  width: 20%;
+}
+
+body {
+  text-align: center;
+  background: #f4f4f4;
+}
+
+.informations {
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  color: #6E6E6E;
+  padding: 12px;
+}
+
+.title {
+  float: left;
+  font-weight:nomal;
+  margin: 0;
+}
+
+.navigation {
+  float: right;
+}
+
+.navigation p{
+  float: left;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 16px;
+}
+
+.navigation p a{
+  color: #6E6E6E;
+  text-decoration: none;
+}
+
+.icon{
+  background: 60px;
+  border-radius: 50%;
+  border: 8px solid #778899;
+  margin-top: 40px;
+}
+
+.container{
+  width:100%;
+  margin: 0 auto 0 auto;
+}
+/*解像度をwidthで先に決めておき、その後marginで揃える*/
+
+.name{
+  font-weight:bold;
+  font-family: serif;
+  font-size: 25px;
+  margin: 40px auto;
+}
+
+.profile{
+  font-size:15px;
+  font-family:cursive;
+  clear: both;
+}
+
+.main{
+  width: 750px;
+  margin: 0 auto;
+  text-align: justify;
+  text-justify: inter-ideograph;
+  color: #2E2E2E;
+}
+
+.pf{
+  margin-bottom: 20px;
+}
+
+.pr{
+  padding-bottom: 50px;
+}

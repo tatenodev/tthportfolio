@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hikaru Tateno | Portfolio Site</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
+    <!-- スタイルリセットcss -->
+    <link rel="stylesheet" href="css/app.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/lity/1.6.6/lity.css' />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/lity/1.6.6/lity.js'></script>
+    <script src="js/jquery.js"></script>
+<script>
+$(function(){
+    // スクロールバーの横幅を取得
+    $('html').append('<div class="scrollbar" style="overflow:scroll;"></div>')
+    var scrollsize = window.innerWidth - $('.scrollbar').prop('clientWidth');
+    $('.scrollbar').hide();
+
+    // 「.modal-open」をクリック
+    $('.modal-open').click(function(){
+        // html、bodyを固定（overflow:hiddenにする）
+        $('html, body').addClass('lock');
+
+        // オーバーレイ用の要素を追加
+        $('body').append('<div class="modal-overlay"></div>');
+
+        // オーバーレイをフェードイン
+        $('.modal-overlay').fadeIn('slow');
+
+        // モーダルコンテンツのIDを取得
+        var modal = '#' + $(this).attr('data-target');
+
+         // モーダルコンテンツを囲む要素を追加
+        $(modal).wrap("<div class='modal-wrap'></div>");
+
+        // モーダルコンテンツを囲む要素を表示
+        $('.modal-wrap').show();
+
+        // モーダルコンテンツの表示位置を設定
+        modalResize();
+
+         // モーダルコンテンツフェードイン
+        $(modal).fadeIn('slow');
+
+        // モーダルコンテンツをクリックした時はフェードアウトしない
+        $(modal).click(function(e){
+            e.stopPropagation();
+        });
+
+        // 「.modal-overlay」あるいは「.modal-close」をクリック
+        $('.modal-wrap, .modal-close').off().click(function(){
+            // モーダルコンテンツとオーバーレイをフェードアウト
+            $(modal).fadeOut('slow');
+            $('.modal-overlay').fadeOut('slow',function(){
+                // html、bodyの固定解除
+                $('html, body').removeClass('lock');
+                // オーバーレイを削除
+                $('.modal-overlay').remove();
+                // モーダルコンテンツを囲む要素を削除
+                $(modal).unwrap("<div class='modal-wrap'></div>");
+           });
+        });
+
+        // リサイズしたら表示位置を再取得
+        $(window).on('resize', function(){
+            modalResize();
+        });
+
+        // モーダルコンテンツの表示位置を設定する関数
+        function modalResize(){
+            // ウィンドウの横幅、高さを取得
+            var w = $(window).width();
+            var h = $(window).height();
+
+            // モーダルコンテンツの横幅、高さを取得
+            var mw = $(modal).outerWidth(true);
+            var mh = $(modal).outerHeight(true);
+
+            // モーダルコンテンツの表示位置を設定
+            if ((mh > h) && (mw > w)) {
+                $(modal).css({'left': 0 + 'px','top': 0 + 'px'});
+            } else if ((mh > h) && (mw < w)) {
+                var x = (w - scrollsize - mw) / 2;
+                $(modal).css({'left': x + 'px','top': 0 + 'px'});
+            } else if ((mh < h) && (mw > w)) {
+                var y = (h - scrollsize - mh) / 2;
+                $(modal).css({'left': 0 + 'px','top': y + 'px'});
+            } else {
+                var x = (w - mw) / 2;
+                var y = (h - mh) / 2;
+                $(modal).css({'left': x + 'px','top': y + 'px'});
+            }
+        }
+
+    });
+});
+</script>
+
+<style>
+
+.lock {
+    overflow:hidden;
+}
+
+.modal-content {
+    position:relative;
+    display:none;
+    width:50%;
+    margin:30px;
+    padding:10px 20px;
+    border:2px solid #aaa;
+    background:#fff;
+}
+
+.modal-content p {
+    margin:0;
+    padding:0;
+}
+
+.modal-overlay {
+    z-index:1;2
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:120%;
+    background-color:rgba(0,0,0,0.75);
+}
+
+.modal-wrap {
+    z-index:2;
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    overflow:auto;
+}
+
+.modal-open {
+    color:#00f;
+    text-decoration:underline;
+}
+
+.modal-open:hover {
+    cursor:pointer;
+    color:#f00;
+}
+
+.modal-close {
+    color:#00f;
+    text-decoration:underline;
+}
+
+.modal-close:hover {
+    cursor:pointer;
+    color:#f00;
+}
+</style>
+
+
+
+
+  </head>
+  <body>
+
+    <div class="informations clearfix">
+      <h1 class="title">A Graphic Designer / Hikaru Tateno</h1>
+      <div class="navigation clearfix">
+          <p><a href="index.html">Home</a></p>
+          <p><a href="about.html">About</a></p>
+      </div>
+    </div>
+
+    <div class="keyvisual">
+      <p class="tagline">Portfolio<span class="subhead">Hikaru Tateno</span></p>
+    </div>
+
+    <div class="works clearfix"> <!-- clearfixで無かった高さをコンテンツと同じ高さにする-->
+
+      <p class="main">Web design</p>
+     
+      <div class="work">
+          <a data-target="con1" class="modal-open"><img src="imgs/wf_logo.png"></a>
+        <div class="caption">
+          <p>Wonder Festival　redesign</p>
+          <p class="credit">Skill : Photoshop Illustrator</p>
+        </div>
+      </div>
+     
+      <div class="work">
+        <a data-target="con2" class="modal-open"><img src="imgs/amanoya_2.png"></a>
+        <div class="caption">
+          <p>天乃屋　ridesign</p>
+          <p class="credit">Skill : Photoshop Illustrator</p>
+        </div>
+      </div>
+     
+      <div class="work">
+        <a data-target="con3" class="modal-open"><img src="imgs/inQ_2.png"></a>
+        <div class="caption">
+          <p>印刷工房inQ　Landingpage</p>
+          <p class="credit">Skill : Photoshop Illustrator</p>
+        </div>
+      </div>
+      
+      <div class="work">
+        <a data-target="con7" class="modal-open"><img src="imgs/clue_logo.jpg"></a>
+        <div class="caption">
+			<a href="http://cluetdg.html.xdomain.jp/member.html"target="_blank"><p>CLUE メンバー紹介ページ</p></a>
+          <p class="credit">Skill : Dreamweaver html css</p>
+        </div>
+      </div>
+
+      <div class="work">
+        <a data-target="con9" class="modal-open"><img src="imgs/clubpana.png"></a>
+        <div class="caption">
+        <p>CULBPanasonic 会員サイト</p></a>
+        <p class="credit">Skill : Sublimetext html css</p>
+        </div>
+      </div>
+      
+
+      
+      <div class="clear"></div>
+
+     
+      <p class="main">Graphics</p>
+     
+      <div class="work">
+          <a data-target="con4" class="modal-open"><img src="imgs/typeface_2.png"></a>
+        <div class="caption">
+          <p>Typeface 「Steamtext」</p>
+          <p class="credit">Skill : drawing</p>
+        </div>
+      </div>
+     
+      <div class="work">
+        <a data-target="con5" class="modal-open"><img src="imgs/blackbox_2.png"></a>
+        <div class="caption">
+          <p>JAGDA学生グランプリ 2017　応募作品</p>
+          <p class="credit">Skill : Illustrator</p>
+        </div>
+      </div>
+
+       <div class="work">
+        <a data-target="con6" class="modal-open"><img src="imgs/edomono_2.jpg"></a>
+        <div class="caption">
+          <p>江戸もの made in tokyo logo</p>
+          <p class="credit">Skill : Illustrator</p>
+        </div>
+      </div>
+      
+       <div class="work">
+        <a data-target="con8" class="modal-open">
+        <img src="imgs/apple.png">
+        </a>
+        <div class="caption">
+          <p>広告　東京駅限定りんごのバウムクーヘン</p>
+          <p class="credit">Skill : Illustrator</p>
+        </div>
+      </div>
+      
+      
+      
+      
+     <!-- <div class="work">
+        <a data-target="con6" class="modal-open"><img src="imgs/edomono_2.jpg"></a>
+        <div class="caption">
+          <p>江戸もの made in tokyo logo</p>
+          <p class="credit">Skill : Illustrator</p>
+        </div>
+      </div>-->
+      
+      <div class="clear"></div>
+
+      <p class="main">Photos</p>
+
+      <div class="work">
+          <a href="photo/1.jpg" data-lity="data-lity"><img src="imgs/photo_1.jpg"></a>
+        <div class="caption">
+          <p>「築地」</p>
+          <p class="credit">Skill : single lens reflex camera</p>
+        </div>
+      </div>
+
+      <div class="work">
+        <a href="photo/2.jpg" data-lity="data-lity"><img src="imgs/photo_2.jpg"></a>
+        <div class="caption">
+          <p>「浅草」</p>
+          <p class="credit">Skill : single lens reflex camera</p>
+        </div>
+      </div>
+
+      <div class="work">
+        <a href="photo/4.jpg" data-lity="data-lity"><img src="imgs/photo_4.jpg"></a>
+        <div class="caption">
+          <p>「築地」</p>
+          <p class="credit">Skill : single lens reflex camera</p>
+        </div>
+      </div>
+
+      <div class="work">
+        <a href="photo/5.jpg" data-lity="data-lity"><img src="imgs/photo_5.jpg"></a>
+        <div class="caption">
+          <p>「築地」</p>
+          <p class="credit">Skill : single lens reflex camera</p>
+        </div>
+      </div>
+
+      <div class="work">
+        <a href="photo/7.jpg" data-lity="data-lity"><img src="imgs/photo_7.jpg"></a>
+        <div class="caption">
+          <p>「雷門」</p>
+          <p class="credit">Skill : single lens reflex camera</p>
+        </div>
+      </div>
+
+      <div class="work">
+        <a href="photo/11.jpg" data-lity="data-lity"><img src="imgs/photo_11.jpg"></a>
+        <div class="caption">
+          <p>「路地」</p>
+          <p class="credit">Skill : single lens reflex camera</p>
+        </div>
+      </div>
+
+      <div class="work">
+        <a href="photo/13.jpg" data-lity="data-lity"><img src="imgs/photo_13.jpg"></a>
+        <div class="caption">
+          <p>「Flower」</p>
+          <p class="credit">Skill : single lens reflex camera</p>
+        </div>
+      </div>
+
+      <div class="work">
+        <a href="photo/10.jpg" data-lity="data-lity"><img src="imgs/photo_10.jpg"></a>
+        <div class="caption">
+          <p>「Instrument」</p>
+          <p class="credit">Skill : single lens reflex camera</p>
+        </div>
+      </div>
+
+      <div class="work">
+        <a href="photo/14.jpg" data-lity="data-lity"><img src="imgs/photo_14.jpg"></a>
+        <div class="caption">
+          <p>「Flower」</p>
+          <p class="credit">Skill : single lens reflex camera</p>
+        </div>
+      </div>
+
+
+
+      <div id="con1" class="modal-content">
+        <p><a ><img src="imgs/wf_index.jpg" alt=""></a></p>
+        <p class="period">国内最大級の造形の祭典と言われる「ワンダーフェスティバル」のリニューアルデザインです。会場の雰囲気や楽しさが伝わるようなデザインを心ががけて制作しました。</p>
+		 <p class="period">制作期間：　約3週間</p>
+		<p class="period">skill：　Illustrator</p>
+       <p class="period">デザインのみ</p>
+        <p><a class="modal-close"></a></p>
+      </div>
+
+      <div id="con2" class="modal-content">
+        <p><a ><img src="imgs/amanoya.png" alt=""></a></p>
+        <p class="period">歌舞伎揚げのおせんべいで有名な天乃屋のwebサイトのリニューアルデザインを制作しました。歌舞伎揚げの起源である江戸のお茶屋さんをコンセプトにデザインしました。サイトの雰囲気に合うようにMAPは手書きで描き統一感を持たせました。</p>
+        <p class="period">制作期間：　約3週間</p>
+        <p class="period">skill：　Illustrator</p>
+        <p class="period">デザインのみ</p>
+        <p><a class="modal-close"></a></p>
+      </div>
+
+      <div id="con3" class="modal-content">
+        <p><a ><img src="imgs/inQ.png" alt=""></a></p>
+        <p class="period">東京デザイナー学院の印刷工房である「inQ」を紹介するランディングページの1案です。</p>
+        <p class="period">制作期間：　約3週間</p>
+        <p class="period">skill：　Illustrator</p>
+        <p class="period">デザインのみ</p>
+        <p><a class="modal-close"></a></p>
+      </div>
+
+      <div id="con4" class="modal-content">
+        <p><a ><img src="imgs/typeface.png" alt=""></a></p>
+        <p class="period">私が制作したタイプフェイス「Steam text」です。スチームパンクの世界観を意識し制作しました。</p>
+        <p class="period">制作期間：　約1週間</p>
+        <p class="period"></p>
+        <p class="period"></p>
+        <p><a class="modal-close"></a></p>
+      </div>
+
+      <div id="con5" class="modal-content">
+        <p><a ><img src="imgs/blackbox.png" alt=""></a></p>
+        <p class="period">JAGDA学生グランプリ2017に応募した際の作品です。「食」をテーマにしたB1サイズのポスターを制作しました。ハンバーガーの材料に何が使われているか分からない、様々な添加物が入っている人工的な食べ物という私の中のイメージをパズルを使って表現しました。</p>
+        <p class="period">制作期間：　約3週間</p>
+        <p class="period"></p>
+        <p class="period"></p>
+        <p><a class="modal-close"></a></p>
+      </div>
+
+      <div id="con6" class="modal-content">
+        <p><a ><img src="imgs/edomono.jpg" alt=""></a></p>
+        <p class="period"></p>
+        <p class="period"></p>
+        <p class="period"></p>
+        <p class="period"></p>
+        <p><a class="modal-close"></a></p>
+      </div>
+      
+      <div id="con7" class="modal-content">
+        <p><a ><img src="imgs/clue_web.png" alt=""></a></p>
+        <p class="period">デザイン学生のためのリアルライフマガジン「CLUE」のWebサイトです。メンバー紹介のページを担当しました。</p>
+        <p class="period">制作期間：　約3週間</p>
+        <p class="period">skill：　Dreamweaver　html css</p>
+        <p class="period">コーディングのみ</p>
+        <p><a class="modal-close"></a></p>
+      </div>
+      
+      <div id="con8" class="modal-content">
+        <p><a ><img src="imgs/apple.png" alt=""></a></p>
+        <p class="work_caption">エキュート東京で販売されている東京駅限定「りんごのバウムクーヘン」。<br>
+        実家に帰省する30代から40代ぐらいの子供連れのお母さんをターゲットにした駅張り広告です。りんごのシルエットを大きく配置し、商品の一番の特徴である、りんごをまるごと使ったことを写真表現でわかるように工夫しました。</p>
+		    <p class="period">制作期間：　約1週間</p>
+	     	<p class="period">skill：　Illustrator</p>
+        <p><a class="modal-close"></a></p>
+      </div>
+
+      <div id="con9" class="modal-content">
+        <p><a ><img src="imgs/pana.png" alt=""></a></p>
+        <p class="work_caption">2018年11月~2019年03月までサイト運用更新を担当しておりました。<br>お客様に送るHTMLメールの作成なども行っておりました。</p>
+        <p class="period">skill：　Sublimetext Illustrator Photoshop</p>
+        <p><a class="modal-close"></a></p>
+      </div>
+
+      
+
+      <!--<div class="contact">
+        <a class="button" href="">お問合わせはこちらから</a>
+      </div>-->
+
+      <div class="footer">
+       <p class="copyright">©2019 Hikaru Tateno</p>
+      </div>
+  </body>
+</html>
