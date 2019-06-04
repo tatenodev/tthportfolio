@@ -210,3 +210,12 @@ body{
 .period{
 	font-size: 11px;
 }
+
+.box-style{
+  height: 290px;
+  display: block;
+  padding-left: 15px;
+  padding-right: 15px;
+  background: #ffffff;
+  border-radius: 10px;
+}
