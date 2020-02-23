@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500&display=swap');
+
 .clearfix:before,
 .clearfix:after {
     content: " ";
@@ -24,6 +26,7 @@ img{
 body {
   text-align: center;
   background: #f4f4f4;
+  font-family: 'Noto Sans JP';
 }
 
 .informations {
@@ -32,23 +35,23 @@ body {
   width: 100%;
   color: #6E6E6E;
   padding: 12px;
+  text-align: left;
 }
 
 .title {
-  float: left;
   font-weight:nomal;
   margin: 0;
 }
 
 .navigation {
-  float: right;
+  margin-top: 4px;
 }
 
 .navigation p{
   float: left;
   font-size: 12px;
   font-weight: bold;
-  margin-left: 16px;
+  margin-right: 20px;
 }
 
 .navigation p a{
@@ -60,7 +63,7 @@ body {
   background: 60px;
   border-radius: 50%;
   border: 8px solid #778899;
-  margin-top: 40px;
+  margin-top: 150px;
 }
 
 .container{
@@ -71,14 +74,15 @@ body {
 
 .name{
   font-weight:bold;
-  font-family: serif;
   font-size: 25px;
   margin: 40px auto;
 }
 
 .profile{
-  font-size:15px;
-  font-family:cursive;
+  display: block;
+  font-size: 20px;
+  margin-bottom: 5px;
+  /* font-family:cursive; */
   clear: both;
 }
 
