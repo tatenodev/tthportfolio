@@ -130,9 +130,13 @@ body{
   margin: 0 auto;
   margin-top: 10px;
 }
+.work-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
 
 .work {
-    float: left;
+    /* float: left; */
     width: 33.333333%; /*きっちり3分割するために300pxではなく、33.333333%という割合を書く。*/
     font-size: 12px;
     font-weight: bold;
