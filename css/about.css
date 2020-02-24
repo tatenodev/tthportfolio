@@ -57,6 +57,8 @@ body {
 .navigation p a{
   color: #6E6E6E;
   text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 .icon{
